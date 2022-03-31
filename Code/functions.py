@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Jan 24 10:05:10 2022
-
 @author: Maxime Clenet
 
 Implementation of the function needed to run the figure file.
