@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Last update: 1 Feb 2022
-
 @author: Maxime Clenet
 
 This code display two scenarios:
