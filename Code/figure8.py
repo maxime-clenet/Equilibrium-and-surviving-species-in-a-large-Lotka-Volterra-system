@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Feb  8 11:50:14 2022
-
 @author: Maxime Clenet
 
 
