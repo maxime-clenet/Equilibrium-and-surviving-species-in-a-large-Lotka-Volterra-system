@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Feb  8 10:07:02 2022
-
 @author: Maxime
+
+Spectrum of the Hermitian random matrix B+B^T.
 """
 
 
