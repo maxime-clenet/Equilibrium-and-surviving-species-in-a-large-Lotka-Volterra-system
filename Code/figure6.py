@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Feb  7 17:19:32 2022
-
 @author: Maxime
 
 This program returns curves on m,sigma and p the proportion of persistent species.
