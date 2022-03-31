@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Feb  1 17:48:52 2022
-
 @author: Maxime Clenet
 
 Representation of the phase diagram i.e the set of admissible parameter A. 
@@ -54,5 +52,4 @@ plt.text(0.4, 0.15, r'Zone $\mathcal{C}$', horizontalalignment='center',
 # plt.title(
 #    r'Evolution of the mean condition ($\mu_{max}$) in function of $\alpha$')
 plt.show()
-# plt.savefig('Cond_mu_alpha_LCP.pdf')
 plt.close()
