@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Mar 21 09:42:31 2022
-
 @author: Maxime Clenet
 
 This file is dedicated to the evolution of the Hill number of order 1 for a Monte
