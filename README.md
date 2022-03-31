@@ -4,4 +4,4 @@
 Each figure has its own code file. The function.py file contains the majority of the functions used. 
 
 
- For any question/comment/bug, feel free to contact Maxime Clenet.
+ For any questions, comments or bugs report contact Maxime Clenet.
