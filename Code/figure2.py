@@ -5,7 +5,7 @@
 Representation of the phase diagram i.e the set of admissible parameter A. 
 """
 
-# Importation of the packages
+# Importation of the packages:
 
 import numpy as np
 import matplotlib.pyplot as plt
