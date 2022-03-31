@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Feb 17 09:41:47 2022
-
 @author: Maxime Clenet
 """
 
@@ -26,11 +24,13 @@ for i, value in enumerate(x):
 
 fig = plt.figure(1, figsize=(10, 6))
 plt.plot(x, y_a, color='k')
-plt.axhline(np.sqrt(2*np.log(10)),color='black',linestyle='--',label = 'Feasibility threshold')
-plt.ylim(0,3.5)
+plt.axhline(np.sqrt(2*np.log(10)), color='black',
+            linestyle='--', label='Feasibility threshold')
+plt.ylim(0, 3.5)
 axes = plt.gca()
-axes.yaxis.set_ticks([0,0.5,1,1.5,2,np.sqrt(2*np.log(10)),2.5,3,3.5])
-axes.yaxis.set_ticklabels(('0','0.5','1','1.5','2',r'$\sqrt{2log(10)}$','2.5','3','3.5'),color = 'black', fontsize = 10)
+axes.yaxis.set_ticks([0, 0.5, 1, 1.5, 2, np.sqrt(2*np.log(10)), 2.5, 3, 3.5])
+axes.yaxis.set_ticklabels(('0', '0.5', '1', '1.5', '2',
+                          r'$\sqrt{2log(10)}$', '2.5', '3', '3.5'), color='black', fontsize=10)
 plt.xlabel("Time (t)", fontsize=15)
 plt.ylabel(r"Variation of the interaction strength $\alpha(t)$", fontsize=15)
 plt.legend(loc='upper right')
@@ -53,7 +53,7 @@ for i, value in enumerate(x):
 
 fig = plt.figure(1, figsize=(10, 6))
 plt.plot(x, p_a, color='k', linestyle='--')
-plt.ylim(0,1.1)
+plt.ylim(0, 1.1)
 plt.xlabel("Time (t)", fontsize=15)
 plt.ylabel(r"Variation of the proportion of surviving species $p(t)$", fontsize=15)
 plt.show()
