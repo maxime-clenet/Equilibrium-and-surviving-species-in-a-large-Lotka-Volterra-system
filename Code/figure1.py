@@ -78,7 +78,6 @@ def plot_spectrum(n=100, mu=0, alpha=1, title=True):
     plt.close()
 
     return fig
-# plt.savefig('Spectre_Ginibre_Presentation_Lille.pdf')
 
 
 # An exemple of the first scenario:
