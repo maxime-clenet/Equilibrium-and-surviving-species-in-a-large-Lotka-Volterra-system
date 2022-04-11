@@ -48,7 +48,7 @@ x = np.linspace(0, NBR_IT*TAU, NBR_IT)  # x-axis
 
 fig = plt.figure(1, figsize=(10, 6))
 plt.xlabel("Time (t)", fontsize=15)
-plt.ylabel(r"Shannon diversity index $e^H$", fontsize=15)
+plt.ylabel(r"Hill number of order one ($e^{H'}$)", fontsize=15)
 plt.plot(x, hill, color='k', linestyle='--', label=r"$\mu = 0$")
 plt.plot(x, hill_neg, color='k', linestyle=':', label=r"$\mu = -0.4$")
 plt.plot(x, hill_pos, color='k', label=r"$\mu = 0.4$")
@@ -87,7 +87,7 @@ x = np.linspace(0, NBR_IT*TAU, NBR_IT)  # x-axis
 
 fig = plt.figure(1, figsize=(10, 6))
 plt.xlabel("Time (t)", fontsize=15)
-plt.ylabel(r"Shannon diversity index $e^H$", fontsize=15)
+plt.ylabel(r"Hill number of order one ($e^{H'})$", fontsize=15)
 plt.plot(x, hill_mean, color='k', linestyle='-', label=r"$mean$")
 plt.plot(x, hill_up, color='k', linestyle='--', label=r"$q(0.95)$")
 plt.plot(x, hill_down, color='k', linestyle=':', label=r"$q(0.05)$")
