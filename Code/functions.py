@@ -361,7 +361,7 @@ def empirical_prop(B_size=200, alpha=2, mu=0, mc_prec=100):
     return np.mean(S_p), np.mean(S_m), np.mean(S_sigma)
 
 
-def alpha_abrupt(t, intensity=1):
+def alpha_abrupt(t, intensity=0.5):
     """
     Correspond to the function alpha(t) of the sudden incident.
 
@@ -379,9 +379,9 @@ def alpha_abrupt(t, intensity=1):
 
     """
     if int(t/30) % 2 != 0:
-        return np.sqrt(2)
+        return 1.5
 
-    return np.sqrt(2)+2*intensity
+    return 1.5+2*intensity
 
 
 def f_LV_alpha(x, A, alpha, mu):
