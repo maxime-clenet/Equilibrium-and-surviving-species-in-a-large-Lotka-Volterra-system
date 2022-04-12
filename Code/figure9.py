@@ -13,12 +13,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 from functions import lv_dynamics, alpha_abrupt
 
-
 # %%
 # Choice of the initial condition:
-n = 100  # Dimension
+N_SIZE = 100  # Dimension
 MC_PREC = 500  # Number of MC experiments
-x_init = np.random.random(n)  # Initial condition
+x_init = np.random.random(N_SIZE)  # Initial condition
 NBR_IT = 600  # Number of iterations
 TAU = 0.1  # Time step
 
@@ -26,10 +25,9 @@ hill = np.ones(NBR_IT)
 hill_neg = np.ones(NBR_IT)
 hill_pos = np.ones(NBR_IT)
 
-x_init = np.random.random(n)*2
 for i in range(MC_PREC):
 
-    A = np.random.randn(n, n)
+    A = np.random.randn(N_SIZE, N_SIZE)
 
     hill += lv_dynamics(A, alpha_abrupt, mu=0, x_init=x_init,
                         nbr_it=NBR_IT, tau=TAU)[1]
@@ -59,19 +57,17 @@ plt.show()
 # %%
 
 # Choice of the initial condition:
-n = 100  # Dimension
+N_SIZE = 100  # Dimension
 MC_PREC = 500  # Number of MC experiments
-x_init = np.random.random(n)  # Initial condition
+x_init = np.random.random(N_SIZE)  # Initial condition
 NBR_IT = 600  # Number of iterations
 TAU = 0.1  # Time step
 
 hill = np.ones((MC_PREC, NBR_IT))
 
-
-x_init = np.random.random(n)*2
 for i in range(MC_PREC):
 
-    A = np.random.randn(n, n)
+    A = np.random.randn(N_SIZE, N_SIZE)
 
     hill[i, :] = lv_dynamics(A, alpha_abrupt, mu=0, x_init=x_init,
                              nbr_it=NBR_IT, tau=TAU)[1]
@@ -79,7 +75,6 @@ for i in range(MC_PREC):
 hill_mean = np.mean(hill, axis=0)
 hill_up = np.quantile(hill, 0.95, axis=0)
 hill_down = np.quantile(hill, 0.05, axis=0)
-
 
 x = np.linspace(0, NBR_IT*TAU, NBR_IT)  # x-axis
 

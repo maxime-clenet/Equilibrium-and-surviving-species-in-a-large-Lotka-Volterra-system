@@ -4,8 +4,8 @@
 
 Theoretical approximation versus empirical simulations of the Hill
 number of order 1.
-"""
 
+"""
 
 # Importations of the main packages and functions:
 
@@ -54,12 +54,10 @@ plt.plot(init_alpha, emp_hill, 'k*', label=r"Empirical")
 plt.legend(loc='lower right')
 plt.show()
 
-
 # %%
 
 # Comparison of the estimator as a function of the drift
 # of the interactions (mu).
-
 
 # Choice of the initial condition:
 N_SIZE = 100  # Dimension
@@ -71,7 +69,6 @@ init_mu = np.linspace(-0.4, 0.4, MC_MU)  # initialisation of the parameter mu
 # The bounds can be changed, however the result of
 # the fixed point can be affected
 # (see function.py to change the initial conditions if necessary).
-
 
 emp_hill_mu = np.zeros(MC_MU)
 theo_hill_mu = np.zeros(MC_MU)
@@ -86,7 +83,6 @@ for compt, mu in enumerate(init_mu):
     # Theoretical part:
     x = final_function(alpha=ALPHA, mu=mu)
     theo_hill[compt] = N_SIZE*x[0]/2*(3-(x[2]/x[1])**2)
-
 
 # Part reserved for the display:
 
