@@ -521,3 +521,76 @@ def theoretical_hill_lcp(B):
         H -= n*np.log(n)
 
     return np.exp(H)
+
+
+# %%
+
+def f_LV(x, A):
+    """
+    Function used in the RK scheme to approximate the dynamics of the LV EDO.
+
+    Parameters
+    ----------
+    x : float,
+        x_k in the iterative scheme.
+    A : numpy.ndarray(n,n),
+        Non-normalized matrix of interactions.
+
+    Returns
+    -------
+    x : float.
+
+    """
+    x = np.dot(np.diag(x), (np.ones(A.shape[0])-x + np.dot(A, x)))
+    return x
+
+
+def run(n, x_init, alpha=1, nbr_it=500, tau=0.1):
+    """
+    Runge-Kutta Scheme
+
+    Parameters
+    ----------
+    alpha : function,
+        Function of the interaction strength.
+    x_init : numpy.array,
+        Initial condition.
+    n : int,
+        size of the matrix of interactions A.
+    nbr_it : int,
+        Number of iterations.
+    tau : float,
+        Time step.
+
+    Returns
+    -------
+    traj : numpy.ndarray,
+        Line i corresponds to the values of the dynamics of species i.
+    """
+
+    x = x_init
+
+    A = np.random.randn(n, n)/(np.sqrt(n)*alpha)
+
+    traj = np.eye(n+1, nbr_it)
+    traj[0, :] = np.linspace(0, nbr_it*tau, nbr_it)
+    compt = 0
+    while compt < nbr_it:
+        # if(compt == NBR_IT/2):
+
+        #    x[x < 0.01] = 2
+
+        #    x[x < 2] = 0.001
+
+        f1 = f_LV(x, A)
+        f2 = f_LV(x+tau*0.5*f1, A)
+        f3 = f_LV(x+tau*0.5*f2, A)
+        f4 = f_LV(x+tau*f3, A)
+        x = x+tau*(f1+2*f2+2*f3+f4)/6
+        if len(x[x > 10**30]) > 0:
+            return "burst"
+
+        # x[x < 10**-7] = 0
+        traj[1:, compt] = x
+        compt = compt+1
+    return traj
