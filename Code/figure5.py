@@ -1,87 +1,95 @@
 # -*- coding: utf-8 -*-
 """
-@author: Maxime Clenet
+@author: Maxime
+
+This program returns curves on m,sigma and p the proportion of persistent species.
+A 3D plot representing sigma,m or p in function of (mu,alpha)
 
 
-This file allows you to display the graph showing the
-theoretical distribution vs. the empirical distribution.
+The execution of this program relies exclusively on the "final_function".
+See Function.py for more information.
 """
+
 
 # Importation of the packages and required functions.
 
+from matplotlib import cm
+from matplotlib.ticker import MaxNLocator
 import numpy as np
 import matplotlib.pyplot as plt
-from lemkelcp import lemkelcp
-
-
-# For more informations on this two functions see functions.py
-from functions import density_abundance
 from functions import final_function
-
 
 # %%
 
+# This part concerned a 3D plot representing sigma in function of (mu,alpha)
 
-def plot_distrib(alpha=2, mu=0.2, B_size=2000, law_type='normal'):
+# =========================
+# generating ordered data:
+
+
+def properties(bound_alpha=(1.5, 2.5), bound_mu=(-0.5, 0.5), prec=20, prop_type=2):
     """
-    Return a  graph showing the difference
-    between theoretical distribution vs. the empirical distribution
-    of the abondances.
+    3D plot representing a choosen properties in function of (alpha,mu)
 
     Parameters
     ----------
-    alpha : float in [sqrt(2),Infty), optional
-        Associated to the alpha value in the paper.
-        The default is 2.
-    mu : float in (-infty,1], optional
-        Associated to the mu value in the paper.
-        The default is 0.2.
-    B_size : int, optional
-        Size of the square matrix B.
-        The default is 2000.
+    bound_alpha : tuple, optional
+        1st value corresponds to lower bound of alpha,
+        the 2nd to upper bound. Interval in [sqrt(2),infty].
+        The default is (1.5,2.5)
+    bound_mu : tuple, optional
+        1st value corresponds to lower bound of mu,
+        the 2nd to upper bound. Interval in [-1,1].
+    prec : int, optional
+        Accuracy of the graph grid. The default is 20.
+    prop_type : 0,1 or 2, optional
+        0 - return p* in function of (alpha,mu),
+        1 - return m* in function of (alpha,mu),
+        2 - return sigma* in function of (alpha,mu).
+        The default is 1.
 
     Returns
     -------
-    fig : matplotlib.figure.
+    fig_prop : matplotlib.figure
+        3D representation.
 
     """
-    # Computations for the empirical distribution.
-    # We find a solution using the pivot algorithm.
-    if law_type == 'normal':
-        const = (mu*alpha/np.sqrt(B_size))
-        B = (np.random.randn(B_size, B_size)+const)*(1/(np.sqrt(B_size)*alpha))
-    elif law_type == 'uniform':
-        mu = 0
-        B = (np.random.random((B_size, B_size))*2 *
-             np.sqrt(3)-np.sqrt(3))*1/(np.sqrt(B_size)*alpha)
+    # generating ordered data:
+    x = np.linspace(bound_alpha[0], bound_alpha[1], prec)
 
-    q = np.ones(B_size)
-    M = -np.eye(B_size)+B
+    y = np.linspace(bound_mu[0], bound_mu[1], prec)
 
-    res_lcp = lemkelcp.lemkelcp(-M, -q, maxIter=10000)[0]
-    res_lcp_pos = res_lcp[res_lcp != 0]
+    X, Y = np.meshgrid(x, y, indexing='ij')
 
-    (p, m, sigma) = final_function(alpha, mu)
+    Z = np.zeros((prec, prec))
 
-    x = np.linspace(0.01, 4, 1000)
+    for k in range(prec):
+        for j in range(prec):
+            Z[j, k] = final_function(X[j, k], Y[j, k])[prop_type]
+    # reference picture (X, Y and Z in 2D):
 
-    fig = plt.figure(1, figsize=(10, 6))
-    y = np.ones(len(x))
-    for k, v in enumerate(x):
-        y[k] = density_abundance(v, p, m, sigma, alpha, mu)
+    fig_prop = plt.figure()
+    ax = fig_prop.add_subplot(111, projection='3d')
 
-    plt.plot(x, y, linewidth=2.5, color='k')
-    plt.hist(res_lcp_pos, density=True, bins=20,
-             edgecolor='black', color='#0000003d')
+    surf = ax.plot_surface(X, Y, Z,
+                           cmap='Greys', linewidth=0)
+    fig_prop.colorbar(surf)
 
-    plt.xlabel('Abundances (x*)', fontsize=15)
-    plt.ylabel('Density of the distribution (f)', fontsize=15)
-    plt.xlim(0, 4)
-    # plt.ylim(0,1.7)
-    #plt.legend(loc='upper right')
-    plt.show()
+    #title = ax.set_title("Feasibility phase diagram")
+    # title.set_y(1.01)
+    plt.xlabel(r"Interaction strength ($ \alpha $)")
+    plt.ylabel(r"Interaction drift ($\mu$)")
+    #plt.zlabel(r"$ \pi $")
 
-    return fig
+    ax.xaxis.set_major_locator(MaxNLocator(5))
+    ax.yaxis.set_major_locator(MaxNLocator(6))
+    ax.zaxis.set_major_locator(MaxNLocator(5))
+
+    #ax.view_init(40, -110)
+
+    fig_prop.tight_layout()
+
+    return fig_prop
 
 
-plot_distrib(B_size=300, alpha=np.sqrt(3), mu=0, law_type='uniform')
+properties(prec=100, prop_type=2)
