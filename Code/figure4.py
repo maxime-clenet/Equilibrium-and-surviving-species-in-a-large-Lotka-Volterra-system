@@ -31,11 +31,11 @@ from functions import final_function, empirical_prop
 # The first part is dedicated to the theoretical solution.
 
 
-PREC_ALPHA = 20  # precision of the plot.
+PREC_ALPHA = 40  # precision of the plot.
 MU = 0  # fix the parameter mu.
 
 # We choose the interval of parameter to execute the function.
-init_alpha = np.linspace(1.4, 3.5, PREC_ALPHA)
+init_alpha = np.linspace(1, np.sqrt(2*np.log(1000)), PREC_ALPHA)
 
 # Storage of the result:
 theo_sol = np.ones((PREC_ALPHA, 3))
@@ -61,10 +61,10 @@ for i in range(PREC_ALPHA):
     print("Iteration:", i+1, '/', PREC_ALPHA)
 
     emp_sol[i, :] = empirical_prop(
-        B_size=B_size, alpha=alpha, mu=MU, mc_prec=200)
+        B_size=B_size, alpha=alpha, mu=MU, mc_prec=100)
 
 
-# The following is dedicated to the plot.
+# %% The following is dedicated to the plot.
 # For more information, see functions.py
 # Remark: theo_sol[:, 0] -> p
 # theo_sol[:, 1] -> m

@@ -234,8 +234,12 @@ def final_function(alpha, mu):
     """
 
     # Management of the fixed point resolution:
+    if alpha < np.sqrt(2):
+        cond_init = [0.8, 1.6, 1.6]
+    else:
+        cond_init = [0.99999, 1.00001, 1.00001]
     (p, m, sigma) = optimize.root(
-        sys_gamma, [0.999, 1.01, 1.01], args=(alpha, mu,)).x
+        sys_gamma, cond_init, args=(alpha, mu,)).x
 
     return p, m, sigma
 

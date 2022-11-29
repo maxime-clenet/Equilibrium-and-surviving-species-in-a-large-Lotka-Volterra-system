@@ -84,4 +84,6 @@ def plot_distrib(alpha=2, mu=0.2, B_size=2000, law_type='normal'):
     return fig
 
 
-plot_distrib(B_size=300, alpha=np.sqrt(3), mu=0, law_type='uniform')
+plot_distrib(B_size=2000, alpha=2, mu=0, law_type='normal')
+
+plot_distrib(B_size=2000, alpha=np.sqrt(3), mu=0, law_type='uniform')
