@@ -37,8 +37,8 @@ plt.plot(limit_alpha, limit_perturbed, color='k')
 
 # Added a hatched area to represent the admissible area:
 plt.fill_between(limit_alpha, limit_mu, color='#0000003d')
-plt.xlabel(r"$a$", fontsize=15)
-plt.ylabel(r"$m$", fontsize=15)
+plt.xlabel(r"$\alpha$", fontsize=15)
+plt.ylabel(r"$\mu$", fontsize=15)
 plt.ylim(0, 1)
 plt.xlim(1, 4)
 
